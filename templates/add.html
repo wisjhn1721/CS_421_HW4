@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add
+{% endblock title%}
+{% block content %}
+
+    <div class="m-4">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+
+        <h2 class="mt-5">Add Record:</h2>
+        <div class="record-form">
+            <form method="POST" action="{{ url_for('add')}}">
+                <div class="mb-3">
+                    {{ form.name.label(class="form-label") }} {{ form.name }}
+                    <ul>
+                        {%  for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }} {{ form.email }}
+                     <ul>
+                        {%  for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    {{ form.phone.label(class="form-label") }} {{ form.phone }}
+                     <ul>
+                        {%  for error in form.phone.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    {{ form.address.label(class="form-label") }} {{ form.address }}
+                     <ul>
+                        {%  for error in form.address.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {{ form.submit }}
+                {{  form.csrf_token }}
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block sidebar %}
+    <div class="content-section">
+        <h3>Welcome!</h3>
+        <p class='text-muted'>Check out my social media:</p>
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-light">
+                <a href="https://github.com/wisjhn1721">Github</a>
+            </li>
+            <li class="list-group-item list-group-item-light">
+                <a href="https://www.linkedin.com/in/john-wise-6a9ba3218/">LinkedIn</a>
+            </li>
+        </ul>
+    </div>
+{% endblock sidebar %}

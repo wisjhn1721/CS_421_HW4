@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Remove
+{% endblock title%}
+{% block content %}
+
+    <div class="m-4">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <h2 class="mt-5">Remove Record:</h2>
+        <div class="record-form">
+            <form method="POST" action="{{ url_for('remove')}}">
+                <div class="mb-3">
+                    {{ remove_form.phone.label(class="form-label") }} {{ remove_form.phone }}
+                    <ul>
+                        {%  for error in remove_form.phone.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {{ remove_form.submit }}
+                {{  remove_form.csrf_token }}
+            </form>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+{% block sidebar %}
+{% endblock sidebar %}
